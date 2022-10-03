@@ -77,6 +77,10 @@
                                     <a class="dropdown-item" href="{{ route('abstract-matching') }}">                                                                              
                                         Abstract matching
                                     </a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('view-stats') }}">
+                                    	View stats
+                                    </a>
                                 </div>
                             </li>
                         

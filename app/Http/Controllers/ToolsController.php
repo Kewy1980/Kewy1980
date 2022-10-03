@@ -336,9 +336,7 @@ class ToolsController extends Controller
             }
             
             $content = json_decode($response->getBody(), true);
-            $results = $content['result']['results'];
-            
-            //dd($results);
+            $results = $content['result']['results'];          
             
             $keywordHelper = new KeywordHelper();
                     
@@ -365,6 +363,35 @@ class ToolsController extends Controller
     public function abstractMatchingDownload($dataRepo) 
     {
         return Excel::download(new AbstractMatchingExport($dataRepo), 'abstract-matching.xlsx');
+    }
+    
+    public function viewStats()
+    {
+        $client = new \GuzzleHttp\Client();
+        
+        $searchRequest = new PackageSearch();
+        $searchRequest->rows = 0;
+        //$searchRequest->query = 'msl_subdomain:"rock and melt physics"';
+        //$searchRequest->filterQuery = 'type: data-publication&owner_org:c59f7519-ca52-4c28-a7ce-315da596f686';
+        $searchRequest->addFilterQuery('type: data-publication');
+        $searchRequest->addFilterQuery('msl_subdomain:"rock and melt physics"');
+        //$searchRequest->filterQuery = 'type: data-publication';
+        //$searchRequest->facetField = 'msl_subdomains';
+        
+        //dd($searchRequest->getAsQueryArray());
+        
+        try {
+            $response = $client->request($searchRequest->method, $searchRequest->endPoint, $searchRequest->getAsQueryArray());
+        } catch (\Exception $e) {
+            dd($e);
+        }
+        
+        $content = json_decode($response->getBody(), true);
+        $results = $content['result']['results'];
+        
+        dd($content['result']);
+        
+        return view('stats');
     }
   
 }

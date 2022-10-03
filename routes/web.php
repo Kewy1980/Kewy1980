@@ -53,6 +53,7 @@ Route::get('tools/unmatchedkeywords', [ToolsController::class, 'viewUnmatchedKey
 Route::get('tools/unmatchedkeywordsdownload', [ToolsController::class, 'downloadUnmatchedKeywords'])->name('download-unmatched-keywords');
 Route::get('tools/abstract-matching', [ToolsController::class, 'abstractMatching'])->name('abstract-matching');
 Route::get('tools/abstract-matching-download/{data_repo}', [ToolsController::class, 'abstractMatchingDownload'])->name('abstract-matching-download');
+Route::get('tools/view-stats', [ToolsController::class, 'viewStats'])->name('view-stats');
 
 Route::post('/create-import', [HomeController::class, 'createImport'])->name('create-import');
 Route::get('/imports', [HomeController::class, 'imports'])->name('imports');
